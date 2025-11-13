@@ -135,17 +135,21 @@ section {
 .hero {
     min-height: 90vh;
     display: flex;
+    flex-direction: column; /* Para que la imagen del autobús se alinee debajo */
     justify-content: center;
     align-items: center;
-    /* Fondo que evoca el estilo gamer */
-    background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.85)), url('https://picsum.photos/1920/1080?random=1'); /* Placeholder de imagen abstracta */
+    background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.85)), url('https://picsum.photos/1920/1080?random=1'); /* Placeholder */
     background-size: cover;
     background-position: center;
     border-bottom: 5px solid var(--color-accent);
+    position: relative; /* Para posicionar la imagen del autobús */
+    overflow: hidden; /* Para que el autobús no se desborde */
 }
 
 .hero-content {
     max-width: 900px;
+    margin-bottom: 40px; /* Espacio antes de la imagen del autobús */
+    z-index: 10; /* Para que el contenido esté por encima del autobús */
 }
 
 .hero-content h1 {
@@ -159,6 +163,26 @@ section {
     font-size: 1.4rem;
     margin-bottom: 50px;
 }
+
+/* --- IMAGEN 1: Autobús Nitro Gamer en la sección Hero --- */
+.hero-image-bus {
+    max-width: 90%; /* Ajusta el ancho del autobús */
+    height: auto;
+    margin-top: 50px;
+    animation: slideInBus 2s ease-out forwards; /* Animación de entrada */
+}
+
+@keyframes slideInBus {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 
 /* --- SECCIÓN PRODUCTOS/SOLUCIÓN --- */
 .product-showcase {
@@ -209,6 +233,47 @@ section {
     margin-top: 25px;
 }
 
+/* --- IMAGEN 2: Logo/Concepto de Nitro Gamer dentro de la card de solución --- */
+.product-concept-logo {
+    max-width: 80%; /* Ajusta el tamaño */
+    height: auto;
+    margin-top: 30px;
+    display: block; /* Para que ocupe su propia línea */
+    margin-left: auto;
+    margin-right: auto;
+    animation: pulseGlow 2s infinite alternate; /* Animación de brillo */
+}
+
+@keyframes pulseGlow {
+    from {
+        filter: drop-shadow(0 0 5px var(--color-accent));
+    }
+    to {
+        filter: drop-shadow(0 0 15px var(--color-hover));
+    }
+}
+
+/* --- IMAGEN 3: Línea completa de productos --- */
+.full-product-lineup {
+    margin-top: 100px;
+    padding-top: 50px;
+    border-top: 1px solid #333;
+}
+
+.full-product-lineup h3 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: var(--color-accent);
+}
+
+.product-lineup-image {
+    max-width: 90%; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 255, 234, 0.2);
+}
+
+
 /* --- SECCIÓN POR QUÉ ELEGIRNOS --- */
 .why-us {
     background-color: var(--color-bg-primary);
@@ -234,7 +299,7 @@ section {
     border: 1px solid var(--color-accent);
     box-shadow: 0 0 15px rgba(0, 255, 234, 0.1);
     transition: transform 0.3s, background-color 0.3s;
-    height: 100%; /* Asegura que todas las tarjetas tengan la misma altura si el contenido es similar */
+    height: 100%; 
 }
 
 .reason-card:hover {
@@ -293,7 +358,7 @@ section {
 /* ===================================== */
 @media (max-width: 900px) {
     .product-grid {
-        grid-template-columns: 1fr; /* Una sola columna en tabletas y móviles */
+        grid-template-columns: 1fr;
     }
 
     .hero-content h1 {
@@ -316,15 +381,28 @@ section {
     .footer .social-links {
         margin-top: 10px;
     }
+
+    .hero-image-bus {
+        max-width: 100%;
+        margin-top: 30px;
+    }
+
+    .product-concept-logo {
+        max-width: 70%;
+    }
+
+    .product-lineup-image {
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
     .nav {
-        display: none; /* Ocultar el menú de navegación en móvil */
+        display: none;
         flex-direction: column;
         width: 100%;
         position: absolute;
-        top: 60px; /* Debajo del header */
+        top: 60px;
         left: 0;
         background-color: var(--color-bg-secondary);
         border-top: 1px solid var(--color-accent);
@@ -338,11 +416,450 @@ section {
     }
 
     .menu-toggle {
-        display: block; /* Mostrar el ícono del menú */
+        display: block;
     }
     
     .nav.active {
-        display: flex; /* Mostrar el menú cuando está activo */
+        display: flex;
+    }
+
+    .header {
+        padding: 15px 5%;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    section {
+        padding: 60px 5%;
+    } /* RESET BÁSICO Y FUENTES */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-bg-primary: #0A0A0A; /* Negro profundo */
+    --color-bg-secondary: #1C1C1C; /* Gris oscuro */
+    --color-accent: #00FFEA; /* Cian Eléctrico/Neón (Ajustado) */
+    --color-text-light: #F0F0F0;
+    --color-hover: #00DDEB;
+    --font-primary: 'Roboto', sans-serif;
+    --font-heading: 'Oswald', sans-serif;
+}
+
+body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-light);
+    font-family: var(--font-primary);
+    line-height: 1.6;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    color: var(--color-text-light);
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-accent);
+}
+
+/* --- CABECERA (HEADER/NAV) --- */
+.header {
+    background-color: var(--color-bg-secondary);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--color-accent);
+    box-shadow: 0 4px 10px rgba(0, 255, 234, 0.1);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    letter-spacing: 3px;
+    text-shadow: 0 0 5px var(--color-accent);
+}
+
+.nav a {
+    margin-left: 25px;
+    font-weight: 700;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.nav a:hover {
+    color: var(--color-hover);
+    text-shadow: 0 0 8px var(--color-hover);
+}
+
+.menu-toggle {
+    display: none; 
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-accent);
+}
+
+/* --- BOTONES (NEON & PRIMARY) --- */
+.btn-neon {
+    padding: 8px 15px;
+    border: 2px solid var(--color-accent);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--color-accent) !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px var(--color-accent);
+}
+
+.btn-neon:hover {
+    background-color: var(--color-accent);
+    color: var(--color-bg-secondary) !important;
+    box-shadow: 0 0 15px var(--color-accent), 0 0 30px var(--color-accent);
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--color-accent);
+    color: var(--color-bg-primary) !important;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-hover);
+    box-shadow: 0 0 15px var(--color-hover);
+}
+
+.btn-primary-inverted {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: transparent;
+    color: var(--color-accent) !important;
+    font-weight: 700;
+    border: 2px solid var(--color-accent);
+    border-radius: 5px;
+    transition: all 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-primary-inverted:hover {
+    background-color: var(--color-accent);
+    color: var(--color-bg-primary) !important;
+}
+
+
+/* --- SECCIONES GENERALES --- */
+section {
+    padding: 100px 5%;
+    text-align: center;
+}
+
+/* --- SECCIÓN HERO --- */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column; /* Para que la imagen del autobús se alinee debajo */
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(10, 10, 10, 0.85), rgba(10, 10, 10, 0.85)), url('https://picsum.photos/1920/1080?random=1'); /* Placeholder */
+    background-size: cover;
+    background-position: center;
+    border-bottom: 5px solid var(--color-accent);
+    position: relative; /* Para posicionar la imagen del autobús */
+    overflow: hidden; /* Para que el autobús no se desborde */
+}
+
+.hero-content {
+    max-width: 900px;
+    margin-bottom: 40px; /* Espacio antes de la imagen del autobús */
+    z-index: 10; /* Para que el contenido esté por encima del autobús */
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 25px;
+    line-height: 1.1;
+    text-shadow: 0 0 15px var(--color-accent);
+}
+
+.hero-content p {
+    font-size: 1.4rem;
+    margin-bottom: 50px;
+}
+
+/* --- IMAGEN 1: Autobús Nitro Gamer en la sección Hero --- */
+.hero-image-bus {
+    max-width: 90%; /* Ajusta el ancho del autobús */
+    height: auto;
+    margin-top: 50px;
+    animation: slideInBus 2s ease-out forwards; /* Animación de entrada */
+}
+
+@keyframes slideInBus {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+/* --- SECCIÓN PRODUCTOS/SOLUCIÓN --- */
+.product-showcase {
+    background-color: var(--color-bg-secondary);
+}
+
+.product-showcase h2 {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    color: var(--color-accent);
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.problem-solution, .product-card {
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #252525;
+    border: 1px solid #333;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.product-card {
+    border-top: 5px solid var(--color-accent);
+}
+
+.problem-solution h3, .product-card h3 {
+    color: var(--color-accent);
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.highlight-text {
+    font-weight: 700;
+    color: var(--color-hover);
+    margin-top: 20px;
+    display: block;
+}
+
+.product-card .btn-primary-inverted {
+    margin-top: 25px;
+}
+
+/* --- IMAGEN 2: Logo/Concepto de Nitro Gamer dentro de la card de solución --- */
+.product-concept-logo {
+    max-width: 80%; /* Ajusta el tamaño */
+    height: auto;
+    margin-top: 30px;
+    display: block; /* Para que ocupe su propia línea */
+    margin-left: auto;
+    margin-right: auto;
+    animation: pulseGlow 2s infinite alternate; /* Animación de brillo */
+}
+
+@keyframes pulseGlow {
+    from {
+        filter: drop-shadow(0 0 5px var(--color-accent));
+    }
+    to {
+        filter: drop-shadow(0 0 15px var(--color-hover));
+    }
+}
+
+/* --- IMAGEN 3: Línea completa de productos --- */
+.full-product-lineup {
+    margin-top: 100px;
+    padding-top: 50px;
+    border-top: 1px solid #333;
+}
+
+.full-product-lineup h3 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: var(--color-accent);
+}
+
+.product-lineup-image {
+    max-width: 90%; /* Ajusta el tamaño de la imagen */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 255, 234, 0.2);
+}
+
+
+/* --- SECCIÓN POR QUÉ ELEGIRNOS --- */
+.why-us {
+    background-color: var(--color-bg-primary);
+}
+
+.why-us h2 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+.reason-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.reason-card {
+    background-color: #1a1a1a;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--color-accent);
+    box-shadow: 0 0 15px rgba(0, 255, 234, 0.1);
+    transition: transform 0.3s, background-color 0.3s;
+    height: 100%; 
+}
+
+.reason-card:hover {
+    transform: translateY(-5px);
+    background-color: #212121;
+}
+
+.reason-card h3 {
+    color: var(--color-accent);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+/* --- SECCIÓN CTA --- */
+.cta {
+    padding: 80px 5%;
+    background-color: var(--color-bg-secondary);
+    border-top: 3px solid var(--color-accent);
+    border-bottom: 3px solid var(--color-accent);
+}
+
+.cta h2 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.cta p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+}
+
+
+/* --- PIE DE PÁGINA (FOOTER) --- */
+.footer {
+    background-color: #050505;
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    border-top: 1px solid #333;
+}
+
+.footer .social-links a {
+    margin-left: 15px;
+    transition: color 0.3s;
+}
+
+.footer .social-links a:hover {
+    color: var(--color-hover);
+}
+
+
+/* ===================================== */
+/* --- MEDIA QUERIES (RESPONSIVE) --- */
+/* ===================================== */
+@media (max-width: 900px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .cta h2 {
+        font-size: 2.5rem;
+    }
+
+    .cta p {
+        font-size: 1.1rem;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer .social-links {
+        margin-top: 10px;
+    }
+
+    .hero-image-bus {
+        max-width: 100%;
+        margin-top: 30px;
+    }
+
+    .product-concept-logo {
+        max-width: 70%;
+    }
+
+    .product-lineup-image {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: var(--color-bg-secondary);
+        border-top: 1px solid var(--color-accent);
+        padding: 10px 0;
+    }
+
+    .nav a {
+        margin: 10px 0;
+        padding: 10px 5%;
+        border-bottom: 1px solid #333;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+    
+    .nav.active {
+        display: flex;
     }
 
     .header {
@@ -360,4 +877,5 @@ section {
     section {
         padding: 60px 5%;
     }
+}
 }
